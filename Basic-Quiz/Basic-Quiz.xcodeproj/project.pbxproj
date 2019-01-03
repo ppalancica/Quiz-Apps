@@ -13,6 +13,7 @@
 		B40EAFBE21DDF52100CF75B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B40EAFBD21DDF52100CF75B1 /* Assets.xcassets */; };
 		B40EAFC121DDF52100CF75B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B40EAFBF21DDF52100CF75B1 /* LaunchScreen.storyboard */; };
 		B40EAFC921DDF85000CF75B1 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40EAFC821DDF85000CF75B1 /* QuestionsViewController.swift */; };
+		B40EAFCB21DDFED000CF75B1 /* AnswerOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40EAFCA21DDFED000CF75B1 /* AnswerOptionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B40EAFC021DDF52100CF75B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B40EAFC221DDF52100CF75B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B40EAFC821DDF85000CF75B1 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		B40EAFCA21DDFED000CF75B1 /* AnswerOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerOptionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				B40EAFB621DDF52000CF75B1 /* AppDelegate.swift */,
 				B40EAFB821DDF52000CF75B1 /* HomeViewController.swift */,
 				B40EAFC821DDF85000CF75B1 /* QuestionsViewController.swift */,
+				B40EAFCA21DDFED000CF75B1 /* AnswerOptionsViewController.swift */,
 				B40EAFBA21DDF52000CF75B1 /* Main.storyboard */,
 				B40EAFBD21DDF52100CF75B1 /* Assets.xcassets */,
 				B40EAFBF21DDF52100CF75B1 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B40EAFB921DDF52000CF75B1 /* HomeViewController.swift in Sources */,
+				B40EAFCB21DDFED000CF75B1 /* AnswerOptionsViewController.swift in Sources */,
 				B40EAFB721DDF52000CF75B1 /* AppDelegate.swift in Sources */,
 				B40EAFC921DDF85000CF75B1 /* QuestionsViewController.swift in Sources */,
 			);

@@ -13,28 +13,65 @@ class QuestionsViewController: UIViewController {
     @IBOutlet weak var questionsTableView: UITableView!
     
     var questions = [
-        "How many planets are in the Solar System?",
-        "How many continents are on Planet Earth?",
-        "What is the capital of United States?",
-        "What is the capital of Russia?",
-        "Largest country that resides on 2 continents?"
+        "0": [
+            "question": "How many planets are in the Solar System?",
+            "answerOptions": ["7", "8", "9"],
+            "correctAnswer": "9"
+        ],
+        "1": [
+            "question": "How many continents are on Planet Earth?",
+            "answerOptions": ["6", "7", "8"],
+            "correctAnswer": "7"
+        ],
+        "2": [
+            "question": "What is the capital of United States?",
+            "answerOptions": ["Washington", "Washington, D.C.", "Columbia"],
+            "correctAnswer": "Washington, D.C."
+        ],
+        "3": [
+            "question": "What is the capital of Russia?",
+            "answerOptions": ["Kremlin", "Saint Petersburg", "Moscow"],
+            "correctAnswer": "Moscow"
+        ],
+        "4": [
+            "question": "Largest country that resides on 2 continents?",
+            "answerOptions": ["Turkey", "Egypt", "Russia"],
+            "correctAnswer": "Russia"
+        ]
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        questionsTableView.dataSource = self
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = questionsTableView.indexPathForSelectedRow {
+            questionsTableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToAnswerOptions" {
+            let answerOptionsVC = segue.destination as! AnswerOptionsViewController
+            let selectedIndexPath = sender as! IndexPath
+            let selectedIndex = selectedIndexPath.row
+            let questionInfo = questions[String(selectedIndex)]!
+            let question = questionInfo["question"] as! String
+            let answerOptions = questionInfo["answerOptions"] as! [String]
+            let correctAnswer = questionInfo["correctAnswer"] as! String
+            
+            answerOptionsVC.questionAnswerOptions = [
+                "question": question,
+                "answerOptions": answerOptions,
+                "correctAnswer": correctAnswer
+            ]
+        }
     }
-    */
 }
 
 extension QuestionsViewController: UITableViewDataSource {
@@ -45,7 +82,16 @@ extension QuestionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = questions[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+        let questionInfo = questions[String(indexPath.row)]!
+        cell.textLabel?.text = questionInfo["question"] as? String
         return cell
+    }
+}
+
+extension QuestionsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToAnswerOptions", sender: indexPath)
     }
 }
