@@ -13,27 +13,32 @@ class QuestionsViewController: UIViewController {
     @IBOutlet weak var questionsTableView: UITableView!
     
     var questions = [
-        "0": [
+        [
+            "questionId": "0",
             "question": "How many planets are in the Solar System?",
             "answerOptions": ["7", "8", "9"],
             "correctAnswer": "9"
         ],
-        "1": [
+        [
+            "questionId": "1",
             "question": "How many continents are on Planet Earth?",
             "answerOptions": ["6", "7", "8"],
             "correctAnswer": "7"
         ],
-        "2": [
+        [
+            "questionId": "2",
             "question": "What is the capital of United States?",
             "answerOptions": ["Washington", "Washington, D.C.", "Columbia"],
             "correctAnswer": "Washington, D.C."
         ],
-        "3": [
+        [
+            "questionId": "3",
             "question": "What is the capital of Russia?",
             "answerOptions": ["Kremlin", "Saint Petersburg", "Moscow"],
             "correctAnswer": "Moscow"
         ],
-        "4": [
+        [
+            "questionId": "4",
             "question": "Largest country that resides on 2 continents?",
             "answerOptions": ["Turkey", "Egypt", "Russia"],
             "correctAnswer": "Russia"
@@ -60,15 +65,17 @@ class QuestionsViewController: UIViewController {
             let answerOptionsVC = segue.destination as! AnswerOptionsViewController
             let selectedIndexPath = sender as! IndexPath
             let selectedIndex = selectedIndexPath.row
-            let questionInfo = questions[String(selectedIndex)]!
+            let questionInfo = questions[selectedIndex]
             let question = questionInfo["question"] as! String
             let answerOptions = questionInfo["answerOptions"] as! [String]
             let correctAnswer = questionInfo["correctAnswer"] as! String
+            let questionId = questionInfo["questionId"] as! String
             
             answerOptionsVC.questionAnswerOptions = [
                 "question": question,
                 "answerOptions": answerOptions,
-                "correctAnswer": correctAnswer
+                "correctAnswer": correctAnswer,
+                "questionId": questionId
             ]
         }
     }
@@ -83,7 +90,7 @@ extension QuestionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.numberOfLines = 0
-        let questionInfo = questions[String(indexPath.row)]!
+        let questionInfo = questions[indexPath.row]
         cell.textLabel?.text = questionInfo["question"] as? String
         return cell
     }
