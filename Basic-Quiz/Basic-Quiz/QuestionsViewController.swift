@@ -66,17 +66,22 @@ class QuestionsViewController: UIViewController {
             let selectedIndexPath = sender as! IndexPath
             let selectedIndex = selectedIndexPath.row
             let questionInfo = questions[selectedIndex]
+            let questionId = questionInfo["questionId"] as! String
             let question = questionInfo["question"] as! String
             let answerOptions = questionInfo["answerOptions"] as! [String]
             let correctAnswer = questionInfo["correctAnswer"] as! String
-            let questionId = questionInfo["questionId"] as! String
             
             answerOptionsVC.questionAnswerOptions = [
+                "questionId": questionId,
                 "question": question,
                 "answerOptions": answerOptions,
                 "correctAnswer": correctAnswer,
-                "questionId": questionId
             ]
+            
+            let defaults = UserDefaults.standard
+            let userSubmittedAnswer = defaults.value(forKey: questionId) as? String
+            
+            answerOptionsVC.isQuestionAnswered = userSubmittedAnswer != nil
         }
     }
 }

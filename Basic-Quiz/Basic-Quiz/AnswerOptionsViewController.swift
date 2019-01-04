@@ -13,6 +13,7 @@ import UIKit
 class AnswerOptionsViewController: UIViewController {
     
     var questionAnswerOptions: NSDictionary!
+    var isQuestionAnswered: Bool = false
     
     lazy var answerOptions = questionAnswerOptions["answerOptions"] as! [String]
     
@@ -32,6 +33,38 @@ class AnswerOptionsViewController: UIViewController {
         questionLabel.text = questionAnswerOptions["question"] as? String
         resultLabel.text = ""
         submitAnswerButton.isEnabled = false
+        
+        if isQuestionAnswered {
+            answersTableView.allowsSelection = false // answersTableView.isUserInteractionEnabled = false
+            submitAnswerButton.isHidden = true
+            
+            let correctAnswer = questionAnswerOptions["correctAnswer"] as! String
+            let questionId = questionAnswerOptions["questionId"] as! String
+            let defaults = UserDefaults.standard
+            let userSubmittedAnswer = defaults.value(forKey: questionId) as! String
+            
+            if userSubmittedAnswer == correctAnswer {
+                resultLabel.text = "CORRECT"
+            } else {
+                resultLabel.text = "INCORRECT"
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isQuestionAnswered {
+            let questionId = questionAnswerOptions["questionId"] as! String
+            let defaults = UserDefaults.standard
+            let userSubmittedAnswer = defaults.value(forKey: questionId) as! String
+            
+            if let userSubmittedAnswerIndex = answerOptions.firstIndex(of: userSubmittedAnswer) {
+                let indexPath = IndexPath(row: userSubmittedAnswerIndex, section: 0)
+                let cellToBeSelected = answersTableView.cellForRow(at: indexPath)
+                cellToBeSelected?.setSelected(true, animated: true)
+            }
+        }
     }
     
     @IBAction func onCancelButtonTap(_ sender: Any) {
@@ -49,8 +82,13 @@ class AnswerOptionsViewController: UIViewController {
                 resultLabel.text = "INCORRECT"
             }
             
-            answersTableView.isUserInteractionEnabled = false
+            answersTableView.allowsSelection = false // answersTableView.isUserInteractionEnabled = false
             submitAnswerButton.isEnabled = false
+            
+            let questionId = questionAnswerOptions["questionId"] as! String
+            let defaults = UserDefaults.standard
+            
+            defaults.set(selectedAnswer, forKey: questionId)
         }
     }
 }
