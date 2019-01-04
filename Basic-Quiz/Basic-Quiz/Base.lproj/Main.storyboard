@@ -150,19 +150,77 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKZ-0g-VAj">
+                                <rect key="frame" x="16" y="96" width="343" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jvU-DR-chT">
+                                <rect key="frame" x="16" y="152" width="343" height="132"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="rq6-aE-q3E"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="EKD-br-naH" id="06z-Hw-S0k"/>
+                                    <outlet property="delegate" destination="EKD-br-naH" id="duO-h7-gOO"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-Rf-46U">
+                                <rect key="frame" x="57.5" y="378" width="260" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ncs-ZW-fuG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Submit Answer">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSubmitAnswerButtonTap:" destination="EKD-br-naH" eventType="touchUpInside" id="Bac-3x-x7c"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT3-Rp-TCv">
+                                <rect key="frame" x="16" y="316" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qf1-5z-QNZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="gKc-Rf-46U" firstAttribute="top" secondItem="iT3-Rp-TCv" secondAttribute="bottom" constant="32" id="36z-EE-Pnm"/>
                             <constraint firstItem="FFK-uD-sgM" firstAttribute="top" secondItem="LCl-45-wqN" secondAttribute="top" id="B0z-60-fec"/>
+                            <constraint firstItem="LCl-45-wqN" firstAttribute="trailing" secondItem="gKc-Rf-46U" secondAttribute="trailing" constant="57.5" id="CLn-8Y-SvF"/>
+                            <constraint firstItem="LCl-45-wqN" firstAttribute="trailing" secondItem="jvU-DR-chT" secondAttribute="trailing" constant="16" id="Gjh-Kh-xgl"/>
+                            <constraint firstItem="iT3-Rp-TCv" firstAttribute="leading" secondItem="LCl-45-wqN" secondAttribute="leading" constant="16" id="O36-co-QMk"/>
+                            <constraint firstItem="gKc-Rf-46U" firstAttribute="leading" secondItem="LCl-45-wqN" secondAttribute="leading" constant="57.5" id="SN4-gC-7QP"/>
                             <constraint firstItem="FFK-uD-sgM" firstAttribute="leading" secondItem="LCl-45-wqN" secondAttribute="leading" id="Ubg-56-0vb"/>
+                            <constraint firstItem="LCl-45-wqN" firstAttribute="trailing" secondItem="oKZ-0g-VAj" secondAttribute="trailing" constant="16" id="bUp-Gs-bp3"/>
+                            <constraint firstItem="iT3-Rp-TCv" firstAttribute="top" secondItem="jvU-DR-chT" secondAttribute="bottom" constant="32" id="dSt-1d-vkX"/>
+                            <constraint firstItem="oKZ-0g-VAj" firstAttribute="top" secondItem="FFK-uD-sgM" secondAttribute="bottom" constant="32" id="iOi-bS-LLg"/>
+                            <constraint firstItem="oKZ-0g-VAj" firstAttribute="leading" secondItem="LCl-45-wqN" secondAttribute="leading" constant="16" id="ktK-SC-ZhB"/>
                             <constraint firstItem="FFK-uD-sgM" firstAttribute="trailing" secondItem="LCl-45-wqN" secondAttribute="trailing" id="sos-dx-wgE"/>
+                            <constraint firstItem="jvU-DR-chT" firstAttribute="top" secondItem="oKZ-0g-VAj" secondAttribute="bottom" constant="32" id="tbo-E6-Acu"/>
+                            <constraint firstItem="jvU-DR-chT" firstAttribute="leading" secondItem="LCl-45-wqN" secondAttribute="leading" constant="16" id="tk0-86-BFN"/>
+                            <constraint firstItem="LCl-45-wqN" firstAttribute="trailing" secondItem="iT3-Rp-TCv" secondAttribute="trailing" constant="16" id="zNy-l4-JhC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LCl-45-wqN"/>
                     </view>
+                    <connections>
+                        <outlet property="answersTableView" destination="jvU-DR-chT" id="h7C-ci-yrt"/>
+                        <outlet property="questionLabel" destination="oKZ-0g-VAj" id="xR1-e5-Ttz"/>
+                        <outlet property="resultLabel" destination="iT3-Rp-TCv" id="9GR-WU-BgM"/>
+                        <outlet property="submitAnswerButton" destination="gKc-Rf-46U" id="Vw4-Zs-C3N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOV-UD-5ON" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2759" y="789"/>
+            <point key="canvasLocation" x="2757.5999999999999" y="788.45577211394311"/>
         </scene>
     </scenes>
 </document>
