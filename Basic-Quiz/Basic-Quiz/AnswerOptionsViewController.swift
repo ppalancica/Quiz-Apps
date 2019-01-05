@@ -16,8 +16,12 @@ class AnswerOptionsViewController: UIViewController {
     var isQuestionAnswered: Bool = false
     
     lazy var answerOptions = questionAnswerOptions["answerOptions"] as! [String]
+    lazy var correctAnswer = questionAnswerOptions["correctAnswer"] as! String
+    lazy var questionId = questionAnswerOptions["questionId"] as! String
     
     private var selectedIndex: Int?
+    
+    let defaults = UserDefaults.standard
 
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answersTableView: UITableView!
@@ -38,16 +42,9 @@ class AnswerOptionsViewController: UIViewController {
             answersTableView.allowsSelection = false // answersTableView.isUserInteractionEnabled = false
             submitAnswerButton.isHidden = true
             
-            let correctAnswer = questionAnswerOptions["correctAnswer"] as! String
-            let questionId = questionAnswerOptions["questionId"] as! String
-            let defaults = UserDefaults.standard
             let userSubmittedAnswer = defaults.value(forKey: questionId) as! String
             
-            if userSubmittedAnswer == correctAnswer {
-                resultLabel.text = "CORRECT"
-            } else {
-                resultLabel.text = "INCORRECT"
-            }
+            resultLabel.text = (userSubmittedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
         }
     }
     
@@ -55,8 +52,6 @@ class AnswerOptionsViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if isQuestionAnswered {
-            let questionId = questionAnswerOptions["questionId"] as! String
-            let defaults = UserDefaults.standard
             let userSubmittedAnswer = defaults.value(forKey: questionId) as! String
             
             if let userSubmittedAnswerIndex = answerOptions.firstIndex(of: userSubmittedAnswer) {
@@ -74,19 +69,11 @@ class AnswerOptionsViewController: UIViewController {
     @IBAction func onSubmitAnswerButtonTap(_ sender: Any) {
         if let selectedIndex = selectedIndex {
             let selectedAnswer = answerOptions[selectedIndex]
-            let correctAnswer = questionAnswerOptions["correctAnswer"] as! String
             
-            if selectedAnswer == correctAnswer {
-                resultLabel.text = "CORRECT"
-            } else {
-                resultLabel.text = "INCORRECT"
-            }
+            resultLabel.text = (selectedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
             
             answersTableView.allowsSelection = false // answersTableView.isUserInteractionEnabled = false
             submitAnswerButton.isEnabled = false
-            
-            let questionId = questionAnswerOptions["questionId"] as! String
-            let defaults = UserDefaults.standard
             
             defaults.set(selectedAnswer, forKey: questionId)
         }
