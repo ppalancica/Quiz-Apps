@@ -43,8 +43,10 @@ class AnswerOptionsViewController: UIViewController {
             submitAnswerButton.isHidden = true
             
             let userSubmittedAnswer = defaults.value(forKey: questionId) as! String
+            let resultMessage = (userSubmittedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
             
-            resultLabel.text = (userSubmittedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
+            resultLabel.text = resultMessage
+            showAlert(title: "Your answer is:", message: resultMessage)
         }
     }
     
@@ -69,8 +71,10 @@ class AnswerOptionsViewController: UIViewController {
     @IBAction func onSubmitAnswerButtonTap(_ sender: Any) {
         if let selectedIndex = selectedIndex {
             let selectedAnswer = answerOptions[selectedIndex]
+            let resultMessage = (selectedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
             
-            resultLabel.text = (selectedAnswer == correctAnswer) ? "CORRECT" : "INCORRECT"
+            resultLabel.text = resultMessage
+            showAlert(title: "Your answer is:", message: resultMessage)
             
             answersTableView.allowsSelection = false // answersTableView.isUserInteractionEnabled = false
             submitAnswerButton.isEnabled = false
@@ -100,5 +104,15 @@ extension AnswerOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         submitAnswerButton.isEnabled = true
+    }
+}
+
+extension AnswerOptionsViewController {
+    
+    func showAlert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertVC.addAction(alertAction)
+        present(alertVC, animated: true, completion: nil)
     }
 }
